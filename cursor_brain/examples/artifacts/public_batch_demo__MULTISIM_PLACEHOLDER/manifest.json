@@ -1,0 +1,22 @@
+{
+  "round_name": "public_batch_demo",
+  "multisim_id": "MULTISIM_PLACEHOLDER",
+  "generated_artifacts": {
+    "multisim_children_json": "examples/artifacts/public_batch_demo__MULTISIM_PLACEHOLDER/multisim_children.json",
+    "batch_payload_json": "examples/artifacts/public_batch_demo__MULTISIM_PLACEHOLDER/batch_payload.json",
+    "alpha_detail_files": [
+      "examples/artifacts/public_batch_demo__MULTISIM_PLACEHOLDER/alpha_details/ALPHA_PUBLIC_001.json",
+      "examples/artifacts/public_batch_demo__MULTISIM_PLACEHOLDER/alpha_details/ALPHA_PUBLIC_002.json"
+    ]
+  },
+  "summary": {
+    "matched_alpha_count": 2,
+    "missing_alpha_ids": [],
+    "best_candidate": {
+      "alpha_id": "ALPHA_PUBLIC_001",
+      "sharpe": 1.92,
+      "fitness": 1.34,
+      "turnover": 0.14
+    }
+  }
+}

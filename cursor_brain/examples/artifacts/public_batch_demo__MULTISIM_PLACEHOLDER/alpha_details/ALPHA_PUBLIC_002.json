@@ -1,0 +1,47 @@
+{
+  "id": "ALPHA_PUBLIC_002",
+  "type": "REGULAR",
+  "author": "PUBLIC_EXAMPLE",
+  "settings": {
+    "instrumentType": "EQUITY",
+    "region": "EUR",
+    "universe": "TOP2500",
+    "delay": 1,
+    "decay": 4,
+    "neutralization": "INDUSTRY",
+    "truncation": 0.01,
+    "language": "FASTEXPR"
+  },
+  "regular": {
+    "code": "winsorize(rank(ts_mean(sample_signal_field, 20)), std=4)",
+    "description": "Public mock alpha detail record.",
+    "operatorCount": 3
+  },
+  "stage": "IS",
+  "status": "UNSUBMITTED",
+  "is": {
+    "turnover": 0.16,
+    "returns": 0.09,
+    "drawdown": 0.10,
+    "margin": 0.0004,
+    "sharpe": 1.57,
+    "fitness": 1.12,
+    "checks": [
+      {
+        "name": "LOW_SUB_UNIVERSE_SHARPE",
+        "result": "PASS",
+        "value": 0.72
+      },
+      {
+        "name": "LOW_2Y_SHARPE",
+        "result": "PASS",
+        "value": 0.96
+      },
+      {
+        "name": "CONCENTRATED_WEIGHT",
+        "result": "WARNING",
+        "value": 0.10
+      }
+    ]
+  }
+}

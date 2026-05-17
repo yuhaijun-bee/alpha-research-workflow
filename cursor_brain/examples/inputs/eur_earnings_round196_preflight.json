@@ -1,0 +1,114 @@
+{
+  "batch_size": 2,
+  "theme_coverage": [
+    "B",
+    "C"
+  ],
+  "common_operator_usage": {
+    "rank": 1,
+    "winsorize": 1,
+    "ts_mean": 2
+  },
+  "batch_issues": [],
+  "stage_gate_note": "Public placeholder report showing the shape of a preflight output.",
+  "candidates": [
+    {
+      "expression": "rank(ts_mean(sample_event_field, 15))",
+      "economic_rationale": "Public placeholder event candidate.",
+      "fingerprint": {
+        "expression": "rank(ts_mean(sample_event_field, 15))",
+        "fields": [
+          "sample_event_field"
+        ],
+        "operators": [
+          "rank",
+          "ts_mean"
+        ],
+        "infix_operators": [],
+        "operator_count_estimate": 2,
+        "themes": [
+          "B"
+        ],
+        "theme_operators": [],
+        "common_operator_hits": [
+          "rank",
+          "ts_mean"
+        ],
+        "assignment_vars": [],
+        "skeleton": "rank(ts_mean(field,number))",
+        "max_depth": 3
+      },
+      "validation": {
+        "expression": "rank(ts_mean(sample_event_field, 15))",
+        "is_valid": true,
+        "errors": [],
+        "token_count": 10,
+        "statement_count": 0,
+        "required_root_scope": "REGULAR",
+        "allowed_scopes": [
+          "COMBO",
+          "REGULAR"
+        ],
+        "undefined_allowed": true,
+        "field_catalog": {
+          "field_catalog_path": "field_catalogs/PUBLIC_DEMO_FIELD_CATALOG.csv",
+          "field_catalog_loaded": false,
+          "field_catalog_degraded": true,
+          "field_count": 0
+        }
+      },
+      "issues": []
+    },
+    {
+      "expression": "winsorize(rank(ts_mean(sample_event_field, 15)), std=4)",
+      "economic_rationale": "Public placeholder compression variant.",
+      "fingerprint": {
+        "expression": "winsorize(rank(ts_mean(sample_event_field, 15)), std=4)",
+        "fields": [
+          "sample_event_field"
+        ],
+        "operators": [
+          "rank",
+          "ts_mean",
+          "winsorize"
+        ],
+        "infix_operators": [],
+        "operator_count_estimate": 3,
+        "themes": [
+          "C"
+        ],
+        "theme_operators": [
+          "winsorize"
+        ],
+        "common_operator_hits": [
+          "rank",
+          "ts_mean",
+          "winsorize"
+        ],
+        "assignment_vars": [],
+        "skeleton": "winsorize(rank(ts_mean(field,number)),std=number)",
+        "max_depth": 4
+      },
+      "validation": {
+        "expression": "winsorize(rank(ts_mean(sample_event_field, 15)), std=4)",
+        "is_valid": true,
+        "errors": [],
+        "token_count": 17,
+        "statement_count": 0,
+        "required_root_scope": "REGULAR",
+        "allowed_scopes": [
+          "COMBO",
+          "REGULAR"
+        ],
+        "undefined_allowed": true,
+        "field_catalog": {
+          "field_catalog_path": "field_catalogs/PUBLIC_DEMO_FIELD_CATALOG.csv",
+          "field_catalog_loaded": false,
+          "field_catalog_degraded": true,
+          "field_count": 0
+        }
+      },
+      "issues": []
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "candidates": [
+    {
+      "expression": "winsorize(rank(ts_mean(sample_event_field, 15)), std=3)",
+      "economic_rationale": "Public placeholder candidate showing a light concentration repair idea.",
+      "hypothesis": "Tail compression may soften concentration without rewriting the signal.",
+      "dataset_family": "public_concentration_repair_demo"
+    },
+    {
+      "expression": "group_scale(rank(ts_mean(sample_event_field, 15)), industry)",
+      "economic_rationale": "Public placeholder group-scaled repair candidate.",
+      "hypothesis": "Group-aware scaling may reduce concentration while preserving broad ordering.",
+      "dataset_family": "public_group_scale_repair_demo"
+    }
+  ]
+}

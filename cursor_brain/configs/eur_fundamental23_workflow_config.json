@@ -1,0 +1,78 @@
+{
+  "instrument_type": "EQUITY",
+  "region": "EUR",
+  "universe": "TOP2500",
+  "delay": 1,
+  "neutralization": "INDUSTRY",
+  "language": "FASTEXPR",
+  "field_types": [
+    "FUNDAMENTAL"
+  ],
+  "baseline_alpha_id": "PUBLIC_BASELINE_ALPHA",
+  "baseline_expression": "winsorize(add(ts_backfill(sample_value_field, 60), reverse(ts_backfill(sample_quality_field, 60))), std=4)",
+  "field_catalog_path": "field_catalogs/PUBLIC_DEMO_FIELD_CATALOG.csv",
+  "max_operator_count": 8,
+  "batch_size": 8,
+  "inventory_root": "alpha_inventory",
+  "credentials_path": "credential.txt",
+  "operator_cache_path": "operator_compatibility_cache.json",
+  "research": {
+    "min_paper_count": 10,
+    "require_economic_rationale_before_expression": true,
+    "preferred_authority_tiers": [
+      "Public research",
+      "Official documentation"
+    ],
+    "preferred_domains": [
+      "support.worldquantbrain.com"
+    ],
+    "notes": [
+      "This public config is a sanitized template for a value-quality branch."
+    ]
+  },
+  "targets": {
+    "target_sharpe": 2.0,
+    "min_sharpe": 1.5,
+    "target_fitness": 1.4,
+    "min_fitness": 1.0,
+    "target_prod_correlation": 0.4,
+    "max_prod_correlation": 0.55,
+    "target_self_correlation": 0.4,
+    "max_self_correlation": 0.55,
+    "min_turnover": 0.01,
+    "max_turnover": 0.4,
+    "min_margin_bps": 4.0,
+    "require_stability_pass": true,
+    "require_sub_universe_pass": true,
+    "require_weight_pass": true
+  },
+  "automation": {
+    "single_round_goal_required": true,
+    "plateau_min_neighbor_count": 3,
+    "plateau_metric_spread_threshold": 0.03,
+    "plateau_improvement_threshold": 0.02,
+    "min_qualified_alphas_per_day": 1,
+    "prioritize_pyramids": true,
+    "prioritize_income_multipliers": false,
+    "frozen_directions": [],
+    "active_family": "public_demo_family",
+    "research_memory_path": "batch_artifacts/public_research_memory.jsonl",
+    "experience_library_path": "docs/research/public_experience_library_template.json",
+    "stage_scope": "public_demo_scope",
+    "region_allocation": {
+      "EUR": 1.0
+    },
+    "pyramid_priority_targets": [
+      "EUR:D1:PublicDemo"
+    ],
+    "pyramid_priority_table": [
+      {
+        "target": "EUR:D1:PublicDemo",
+        "priority": 1,
+        "multiplier": 1.0,
+        "difficulty": "demo",
+        "role": "public"
+      }
+    ]
+  }
+}

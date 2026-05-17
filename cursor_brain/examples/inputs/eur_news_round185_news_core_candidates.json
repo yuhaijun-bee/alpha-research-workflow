@@ -1,0 +1,16 @@
+{
+  "candidates": [
+    {
+      "expression": "rank(ts_mean(sample_news_field, 20))",
+      "economic_rationale": "Public placeholder news signal used to show a compact news-only candidate.",
+      "hypothesis": "Persistent news intensity may create a weak but testable cross-sectional signal.",
+      "dataset_family": "public_news_demo"
+    },
+    {
+      "expression": "winsorize(rank(ts_mean(sample_news_field, 20)), std=4)",
+      "economic_rationale": "Public placeholder distribution-compressed news candidate.",
+      "hypothesis": "Tail compression may reduce weight concentration without changing the core story.",
+      "dataset_family": "public_news_compressed_demo"
+    }
+  ]
+}

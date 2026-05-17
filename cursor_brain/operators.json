@@ -1,0 +1,814 @@
+{
+  "schema_version": 1,
+  "notes": [
+    "This file is intended as a centralized operator dictionary for WorldQuant BRAIN-style alpha expressions.",
+    "It captures scope (REGULAR/SELECTION/COMBO), operator signature, and (best-effort) parameter defaults/constraints from the provided text.",
+    "Some operators in the platform may have additional overloads or undocumented defaults; treat this as an initial, configurable source of truth."
+  ],
+  "operators": [
+    {
+      "name": "add",
+      "scopes": ["COMBO", "REGULAR", "SELECTION"],
+      "return_type": "MATRIX",
+      "variadic": true,
+      "min_args": 2,
+      "positional_params": [
+        { "name": "x", "type": "ANY" },
+        { "name": "y", "type": "ANY" }
+      ],
+      "keyword_params": {
+        "filter": { "type": "BOOL", "optional": true, "default": false, "description": "If true, treat NaNs as 0 before addition." }
+      }
+    },
+    {
+      "name": "multiply",
+      "scopes": ["COMBO", "REGULAR", "SELECTION"],
+      "return_type": "MATRIX",
+      "variadic": true,
+      "min_args": 2,
+      "positional_params": [
+        { "name": "x", "type": "ANY" },
+        { "name": "y", "type": "ANY" }
+      ],
+      "keyword_params": {
+        "filter": { "type": "BOOL", "optional": true, "default": false, "description": "If true, treat NaNs as 1 before multiplication." }
+      }
+    },
+    {
+      "name": "subtract",
+      "scopes": ["COMBO", "REGULAR", "SELECTION"],
+      "return_type": "MATRIX",
+      "variadic": false,
+      "positional_params": [
+        { "name": "x", "type": "ANY" },
+        { "name": "y", "type": "ANY" }
+      ],
+      "keyword_params": {
+        "filter": { "type": "BOOL", "optional": true, "default": false, "description": "If true, treat NaNs as 0 before subtraction." }
+      }
+    },
+    {
+      "name": "divide",
+      "scopes": ["COMBO", "REGULAR", "SELECTION"],
+      "return_type": "MATRIX",
+      "variadic": false,
+      "positional_params": [
+        { "name": "x", "type": "ANY" },
+        { "name": "y", "type": "ANY" }
+      ],
+      "keyword_params": {}
+    },
+    {
+      "name": "abs",
+      "scopes": ["COMBO", "REGULAR", "SELECTION"],
+      "return_type": "MATRIX",
+      "variadic": false,
+      "positional_params": [{ "name": "x", "type": "ANY" }],
+      "keyword_params": {}
+    },
+    {
+      "name": "sign",
+      "scopes": ["COMBO", "REGULAR", "SELECTION"],
+      "return_type": "MATRIX",
+      "variadic": false,
+      "positional_params": [{ "name": "x", "type": "ANY" }],
+      "keyword_params": {},
+      "description": "sign(x) returns 1 if x>0, -1 if x<0, 0 if x==0, NaN if x is NaN."
+    },
+    {
+      "name": "log",
+      "scopes": ["COMBO", "REGULAR", "SELECTION"],
+      "return_type": "MATRIX",
+      "variadic": false,
+      "positional_params": [{ "name": "x", "type": "ANY" }],
+      "keyword_params": {}
+    },
+    {
+      "name": "power",
+      "scopes": ["COMBO", "REGULAR", "SELECTION"],
+      "return_type": "MATRIX",
+      "variadic": false,
+      "positional_params": [
+        { "name": "x", "type": "ANY" },
+        { "name": "y", "type": "ANY" }
+      ],
+      "keyword_params": {}
+    },
+    {
+      "name": "signed_power",
+      "scopes": ["COMBO", "REGULAR", "SELECTION"],
+      "return_type": "MATRIX",
+      "variadic": false,
+      "positional_params": [
+        { "name": "x", "type": "ANY" },
+        { "name": "y", "type": "ANY" }
+      ],
+      "keyword_params": {},
+      "description": "signed_power(x,y) = sign(x) * abs(x)^y"
+    },
+    {
+      "name": "sqrt",
+      "scopes": ["COMBO", "REGULAR", "SELECTION"],
+      "return_type": "MATRIX",
+      "variadic": false,
+      "positional_params": [{ "name": "x", "type": "ANY" }],
+      "keyword_params": {}
+    },
+    {
+      "name": "inverse",
+      "scopes": ["COMBO", "REGULAR", "SELECTION"],
+      "return_type": "MATRIX",
+      "variadic": false,
+      "positional_params": [{ "name": "x", "type": "ANY" }],
+      "keyword_params": {}
+    },
+    {
+      "name": "reverse",
+      "scopes": ["COMBO", "REGULAR", "SELECTION"],
+      "return_type": "MATRIX",
+      "variadic": false,
+      "positional_params": [{ "name": "x", "type": "ANY" }],
+      "keyword_params": {}
+    },
+    {
+      "name": "max",
+      "scopes": ["COMBO", "REGULAR", "SELECTION"],
+      "return_type": "MATRIX",
+      "variadic": true,
+      "min_args": 2,
+      "positional_params": [
+        { "name": "x", "type": "ANY" },
+        { "name": "y", "type": "ANY" }
+      ],
+      "keyword_params": {}
+    },
+    {
+      "name": "min",
+      "scopes": ["COMBO", "REGULAR", "SELECTION"],
+      "return_type": "MATRIX",
+      "variadic": true,
+      "min_args": 2,
+      "positional_params": [
+        { "name": "x", "type": "ANY" },
+        { "name": "y", "type": "ANY" }
+      ],
+      "keyword_params": {}
+    },
+    {
+      "name": "pasteurize",
+      "scopes": ["COMBO", "REGULAR"],
+      "return_type": "MATRIX",
+      "variadic": false,
+      "positional_params": [{ "name": "x", "type": "ANY" }],
+      "keyword_params": {},
+      "description": "If x is INF or out of universe, convert to NaN."
+    },
+    {
+      "name": "densify",
+      "scopes": ["COMBO", "REGULAR"],
+      "return_type": "GROUP",
+      "variadic": false,
+      "positional_params": [{ "name": "x", "type": "GROUP" }],
+      "keyword_params": {},
+      "description": "Convert sparse group to dense group for computation efficiency."
+    },
+    {
+      "name": "and",
+      "scopes": ["COMBO", "REGULAR", "SELECTION"],
+      "return_type": "MATRIX",
+      "variadic": false,
+      "positional_params": [
+        { "name": "input1", "type": "ANY" },
+        { "name": "input2", "type": "ANY" }
+      ],
+      "keyword_params": {}
+    },
+    {
+      "name": "or",
+      "scopes": ["COMBO", "REGULAR", "SELECTION"],
+      "return_type": "MATRIX",
+      "variadic": false,
+      "positional_params": [
+        { "name": "input1", "type": "ANY" },
+        { "name": "input2", "type": "ANY" }
+      ],
+      "keyword_params": {}
+    },
+    {
+      "name": "not",
+      "scopes": ["COMBO", "REGULAR", "SELECTION"],
+      "return_type": "MATRIX",
+      "variadic": false,
+      "positional_params": [{ "name": "x", "type": "ANY" }],
+      "keyword_params": {}
+    },
+    {
+      "name": "if_else",
+      "scopes": ["COMBO", "REGULAR", "SELECTION"],
+      "return_type": "MATRIX",
+      "variadic": false,
+      "positional_params": [
+        { "name": "condition", "type": "ANY" },
+        { "name": "x", "type": "ANY" },
+        { "name": "y", "type": "ANY" }
+      ],
+      "keyword_params": {}
+    },
+    {
+      "name": "is_nan",
+      "scopes": ["COMBO", "REGULAR", "SELECTION"],
+      "return_type": "MATRIX",
+      "variadic": false,
+      "positional_params": [{ "name": "input", "type": "ANY" }],
+      "keyword_params": {}
+    },
+    {
+      "name": "equal",
+      "scopes": ["COMBO", "REGULAR", "SELECTION"],
+      "return_type": "MATRIX",
+      "variadic": false,
+      "positional_params": [
+        { "name": "input1", "type": "ANY" },
+        { "name": "input2", "type": "ANY" }
+      ],
+      "keyword_params": {}
+    },
+    {
+      "name": "not_equal",
+      "scopes": ["COMBO", "REGULAR", "SELECTION"],
+      "return_type": "MATRIX",
+      "variadic": false,
+      "positional_params": [
+        { "name": "input1", "type": "ANY" },
+        { "name": "input2", "type": "ANY" }
+      ],
+      "keyword_params": {}
+    },
+    {
+      "name": "greater",
+      "scopes": ["COMBO", "REGULAR", "SELECTION"],
+      "return_type": "MATRIX",
+      "variadic": false,
+      "positional_params": [
+        { "name": "input1", "type": "ANY" },
+        { "name": "input2", "type": "ANY" }
+      ],
+      "keyword_params": {}
+    },
+    {
+      "name": "greater_equal",
+      "scopes": ["COMBO", "REGULAR", "SELECTION"],
+      "return_type": "MATRIX",
+      "variadic": false,
+      "positional_params": [
+        { "name": "input1", "type": "ANY" },
+        { "name": "input2", "type": "ANY" }
+      ],
+      "keyword_params": {}
+    },
+    {
+      "name": "less",
+      "scopes": ["COMBO", "REGULAR", "SELECTION"],
+      "return_type": "MATRIX",
+      "variadic": false,
+      "positional_params": [
+        { "name": "input1", "type": "ANY" },
+        { "name": "input2", "type": "ANY" }
+      ],
+      "keyword_params": {}
+    },
+    {
+      "name": "less_equal",
+      "scopes": ["COMBO", "REGULAR", "SELECTION"],
+      "return_type": "MATRIX",
+      "variadic": false,
+      "positional_params": [
+        { "name": "input1", "type": "ANY" },
+        { "name": "input2", "type": "ANY" }
+      ],
+      "keyword_params": {}
+    },
+    {
+      "name": "ts_corr",
+      "scopes": ["COMBO", "REGULAR"],
+      "return_type": "MATRIX",
+      "variadic": false,
+      "positional_params": [
+        { "name": "x", "type": "MATRIX" },
+        { "name": "y", "type": "MATRIX" },
+        { "name": "d", "type": "INT", "constraint": { "gt": 0 } }
+      ],
+      "keyword_params": {}
+    },
+    {
+      "name": "ts_std_dev",
+      "scopes": ["COMBO", "REGULAR"],
+      "return_type": "MATRIX",
+      "variadic": false,
+      "positional_params": [
+        { "name": "x", "type": "MATRIX" },
+        { "name": "d", "type": "INT", "constraint": { "gt": 0 } }
+      ],
+      "keyword_params": {}
+    },
+    {
+      "name": "ts_zscore",
+      "scopes": ["COMBO", "REGULAR"],
+      "return_type": "MATRIX",
+      "variadic": false,
+      "positional_params": [
+        { "name": "x", "type": "MATRIX" },
+        { "name": "d", "type": "INT", "constraint": { "gt": 0 } }
+      ],
+      "keyword_params": {}
+    },
+    {
+      "name": "ts_product",
+      "scopes": ["COMBO", "REGULAR"],
+      "return_type": "MATRIX",
+      "variadic": false,
+      "positional_params": [
+        { "name": "x", "type": "MATRIX" },
+        { "name": "d", "type": "INT", "constraint": { "gt": 0 } }
+      ],
+      "keyword_params": {}
+    },
+    {
+      "name": "ts_decay_linear",
+      "scopes": ["COMBO", "REGULAR"],
+      "return_type": "MATRIX",
+      "variadic": false,
+      "positional_params": [
+        { "name": "x", "type": "MATRIX" },
+        { "name": "d", "type": "INT", "constraint": { "gt": 0 } }
+      ],
+      "keyword_params": {},
+      "description": "Linear time-decayed moving average."
+    },
+    {
+      "name": "ts_covariance",
+      "scopes": ["COMBO", "REGULAR"],
+      "return_type": "MATRIX",
+      "variadic": false,
+      "positional_params": [
+        { "name": "y", "type": "MATRIX" },
+        { "name": "x", "type": "MATRIX" },
+        { "name": "d", "type": "INT", "constraint": { "gt": 0 } }
+      ],
+      "keyword_params": {},
+      "description": "ts_covariance(y, x, d) in the provided text."
+    },
+    {
+      "name": "ts_kurtosis",
+      "scopes": ["COMBO", "REGULAR"],
+      "return_type": "MATRIX",
+      "variadic": false,
+      "positional_params": [
+        { "name": "x", "type": "MATRIX" },
+        { "name": "d", "type": "INT", "constraint": { "gt": 0 } }
+      ],
+      "keyword_params": {}
+    },
+    {
+      "name": "ts_mean",
+      "scopes": ["COMBO", "REGULAR"],
+      "return_type": "MATRIX",
+      "variadic": false,
+      "positional_params": [
+        { "name": "x", "type": "MATRIX" },
+        { "name": "d", "type": "INT", "constraint": { "gt": 0 } }
+      ],
+      "keyword_params": {}
+    },
+    {
+      "name": "ts_rank",
+      "scopes": ["COMBO", "REGULAR"],
+      "return_type": "MATRIX",
+      "variadic": false,
+      "positional_params": [
+        { "name": "x", "type": "MATRIX" },
+        { "name": "d", "type": "INT", "constraint": { "gt": 0 } }
+      ],
+      "keyword_params": {
+        "constant": { "type": "FLOAT", "optional": true, "default": 0 }
+      }
+    },
+    {
+      "name": "ts_delay",
+      "scopes": ["COMBO", "REGULAR"],
+      "return_type": "MATRIX",
+      "variadic": false,
+      "positional_params": [
+        { "name": "x", "type": "MATRIX" },
+        { "name": "d", "type": "INT", "constraint": { "gt": 0 } }
+      ],
+      "keyword_params": {}
+    },
+    {
+      "name": "ts_delta",
+      "scopes": ["COMBO", "REGULAR"],
+      "return_type": "MATRIX",
+      "variadic": false,
+      "positional_params": [
+        { "name": "x", "type": "MATRIX" },
+        { "name": "d", "type": "INT", "constraint": { "gt": 0 } }
+      ],
+      "keyword_params": {}
+    },
+    {
+      "name": "ts_sum",
+      "scopes": ["COMBO", "REGULAR"],
+      "return_type": "MATRIX",
+      "variadic": false,
+      "positional_params": [
+        { "name": "x", "type": "MATRIX" },
+        { "name": "d", "type": "INT", "constraint": { "gt": 0 } }
+      ],
+      "keyword_params": {}
+    },
+    {
+      "name": "ts_backfill",
+      "scopes": ["COMBO", "REGULAR"],
+      "return_type": "MATRIX",
+      "variadic": false,
+      "positional_params": [
+        { "name": "x", "type": "MATRIX" },
+        { "name": "lookback", "type": "INT", "constraint": { "gt": 0, "or": "positional overload" } }
+      ],
+      "keyword_params": {
+        "lookback": { "type": "INT", "optional": true, "description": "If provided, overrides the second positional overload." },
+        "k": { "type": "INT", "optional": true, "default": 1 },
+        "ignore": { "type": "STRING", "optional": true, "default": "NAN" }
+      },
+      "description": "Fill NaNs using recent valid values."
+    },
+    {
+      "name": "ts_av_diff",
+      "scopes": ["COMBO", "REGULAR"],
+      "return_type": "MATRIX",
+      "variadic": false,
+      "positional_params": [
+        { "name": "x", "type": "MATRIX" },
+        { "name": "d", "type": "INT", "constraint": { "gt": 0 } }
+      ],
+      "keyword_params": {}
+    },
+    {
+      "name": "ts_ir",
+      "scopes": ["COMBO", "REGULAR"],
+      "return_type": "MATRIX",
+      "variadic": false,
+      "positional_params": [
+        { "name": "x", "type": "MATRIX" },
+        { "name": "d", "type": "INT", "constraint": { "gt": 0 } }
+      ],
+      "keyword_params": {}
+    },
+    {
+      "name": "ts_max_diff",
+      "scopes": ["COMBO", "REGULAR"],
+      "return_type": "MATRIX",
+      "variadic": false,
+      "positional_params": [
+        { "name": "x", "type": "MATRIX" },
+        { "name": "d", "type": "INT", "constraint": { "gt": 0 } }
+      ],
+      "keyword_params": {}
+    },
+    {
+      "name": "ts_scale",
+      "scopes": ["COMBO", "REGULAR"],
+      "return_type": "MATRIX",
+      "variadic": false,
+      "positional_params": [
+        { "name": "x", "type": "MATRIX" },
+        { "name": "d", "type": "INT", "constraint": { "gt": 0 } }
+      ],
+      "keyword_params": {
+        "constant": { "type": "FLOAT", "optional": true, "default": 0 }
+      }
+    },
+    {
+      "name": "ts_quantile",
+      "scopes": ["COMBO", "REGULAR"],
+      "return_type": "MATRIX",
+      "variadic": false,
+      "positional_params": [
+        { "name": "x", "type": "MATRIX" },
+        { "name": "d", "type": "INT", "constraint": { "gt": 0 } }
+      ],
+      "keyword_params": {
+        "driver": {
+          "type": "STRING",
+          "optional": true,
+          "default": "gaussian",
+          "allowed": ["gaussian", "cauchy", "uniform"]
+        }
+      }
+    },
+    {
+      "name": "ts_arg_max",
+      "scopes": ["COMBO", "REGULAR"],
+      "return_type": "MATRIX",
+      "variadic": false,
+      "positional_params": [
+        { "name": "x", "type": "MATRIX" },
+        { "name": "d", "type": "INT", "constraint": { "gt": 0 } }
+      ],
+      "keyword_params": {}
+    },
+    {
+      "name": "ts_arg_min",
+      "scopes": ["COMBO", "REGULAR"],
+      "return_type": "MATRIX",
+      "variadic": false,
+      "positional_params": [
+        { "name": "x", "type": "MATRIX" },
+        { "name": "d", "type": "INT", "constraint": { "gt": 0 } }
+      ],
+      "keyword_params": {}
+    },
+    {
+      "name": "ts_target_tvr_decay",
+      "scopes": ["COMBO", "REGULAR"],
+      "return_type": "MATRIX",
+      "variadic": false,
+      "positional_params": [{ "name": "x", "type": "MATRIX" }],
+      "keyword_params": {
+        "target_tvr": { "type": "FLOAT", "optional": true, "default": 0.1 }
+      }
+    },
+    {
+      "name": "ts_target_tvr_hump",
+      "scopes": ["COMBO", "REGULAR"],
+      "return_type": "MATRIX",
+      "variadic": false,
+      "positional_params": [{ "name": "x", "type": "MATRIX" }],
+      "keyword_params": {
+        "target_tvr": { "type": "FLOAT", "optional": true, "default": 0.1 }
+      }
+    },
+    {
+      "name": "rank",
+      "scopes": ["COMBO", "REGULAR"],
+      "return_type": "MATRIX",
+      "variadic": false,
+      "positional_params": [{ "name": "x", "type": "MATRIX" }],
+      "keyword_params": {
+        "rate": { "type": "INT", "optional": true, "default": 2, "allowed": [0, 2] }
+      }
+    },
+    {
+      "name": "zscore",
+      "scopes": ["COMBO", "REGULAR"],
+      "return_type": "MATRIX",
+      "variadic": false,
+      "positional_params": [{ "name": "x", "type": "MATRIX" }],
+      "keyword_params": {}
+    },
+    {
+      "name": "winsorize",
+      "scopes": ["COMBO", "REGULAR"],
+      "return_type": "MATRIX",
+      "variadic": false,
+      "positional_params": [{ "name": "x", "type": "MATRIX" }],
+      "keyword_params": {
+        "std": { "type": "FLOAT", "optional": true, "default": 4 }
+      }
+    },
+    {
+      "name": "scale",
+      "scopes": ["COMBO", "REGULAR"],
+      "return_type": "MATRIX",
+      "variadic": false,
+      "positional_params": [{ "name": "x", "type": "MATRIX" }],
+      "keyword_params": {
+        "scale": { "type": "INT", "optional": true, "default": 1 },
+        "longscale": { "type": "INT", "optional": true, "default": 1 },
+        "shortscale": { "type": "INT", "optional": true, "default": 1 }
+      }
+    },
+    {
+      "name": "normalize",
+      "scopes": ["COMBO", "REGULAR"],
+      "return_type": "MATRIX",
+      "variadic": false,
+      "positional_params": [{ "name": "x", "type": "MATRIX" }],
+      "keyword_params": {
+        "useStd": { "type": "BOOL", "optional": true, "default": false },
+        "limit": { "type": "FLOAT", "optional": true, "default": 0.0 }
+      }
+    },
+    {
+      "name": "vector_neut",
+      "scopes": ["COMBO", "REGULAR"],
+      "return_type": "MATRIX",
+      "variadic": false,
+      "positional_params": [
+        { "name": "x", "type": "MATRIX" },
+        { "name": "y", "type": "MATRIX" }
+      ],
+      "keyword_params": {}
+    },
+    {
+      "name": "group_neutralize",
+      "scopes": ["COMBO", "REGULAR"],
+      "return_type": "MATRIX",
+      "variadic": false,
+      "positional_params": [
+        { "name": "x", "type": "MATRIX" },
+        { "name": "group", "type": "GROUP" }
+      ],
+      "keyword_params": {}
+    },
+    {
+      "name": "group_rank",
+      "scopes": ["COMBO", "REGULAR"],
+      "return_type": "MATRIX",
+      "variadic": false,
+      "positional_params": [
+        { "name": "x", "type": "MATRIX" },
+        { "name": "group", "type": "GROUP" }
+      ],
+      "keyword_params": {}
+    },
+    {
+      "name": "group_zscore",
+      "scopes": ["COMBO", "REGULAR"],
+      "return_type": "MATRIX",
+      "variadic": false,
+      "positional_params": [
+        { "name": "x", "type": "MATRIX" },
+        { "name": "group", "type": "GROUP" }
+      ],
+      "keyword_params": {}
+    },
+    {
+      "name": "group_std_dev",
+      "scopes": ["COMBO", "REGULAR"],
+      "return_type": "MATRIX",
+      "variadic": false,
+      "positional_params": [
+        { "name": "x", "type": "MATRIX" },
+        { "name": "group", "type": "GROUP" }
+      ],
+      "keyword_params": {}
+    },
+    {
+      "name": "group_cartesian_product",
+      "scopes": ["COMBO", "REGULAR"],
+      "return_type": "GROUP",
+      "variadic": false,
+      "positional_params": [
+        { "name": "g1", "type": "GROUP" },
+        { "name": "g2", "type": "GROUP" }
+      ],
+      "keyword_params": {}
+    },
+    {
+      "name": "group_scale",
+      "scopes": ["COMBO", "REGULAR"],
+      "return_type": "MATRIX",
+      "variadic": false,
+      "positional_params": [
+        { "name": "x", "type": "MATRIX" },
+        { "name": "group", "type": "GROUP" }
+      ],
+      "keyword_params": {}
+    },
+    {
+      "name": "group_mean",
+      "scopes": ["COMBO", "REGULAR"],
+      "return_type": "MATRIX",
+      "variadic": false,
+      "positional_params": [
+        { "name": "x", "type": "MATRIX" },
+        { "name": "weight", "type": "ANY" },
+        { "name": "group", "type": "GROUP" }
+      ],
+      "keyword_params": {}
+    },
+    {
+      "name": "group_sum",
+      "scopes": ["COMBO", "REGULAR"],
+      "return_type": "MATRIX",
+      "variadic": false,
+      "positional_params": [
+        { "name": "x", "type": "MATRIX" },
+        { "name": "group", "type": "GROUP" }
+      ],
+      "keyword_params": {}
+    },
+    {
+      "name": "group_count",
+      "scopes": ["COMBO", "REGULAR"],
+      "return_type": "MATRIX",
+      "variadic": false,
+      "positional_params": [
+        { "name": "x", "type": "MATRIX" },
+        { "name": "group", "type": "GROUP" }
+      ],
+      "keyword_params": {}
+    },
+    {
+      "name": "group_backfill",
+      "scopes": ["COMBO", "REGULAR"],
+      "return_type": "MATRIX",
+      "variadic": false,
+      "positional_params": [
+        { "name": "x", "type": "MATRIX" },
+        { "name": "group", "type": "GROUP" },
+        { "name": "d", "type": "INT", "constraint": { "gt": 0 } }
+      ],
+      "keyword_params": {}
+    },
+    {
+      "name": "bucket",
+      "scopes": ["COMBO", "REGULAR"],
+      "return_type": "GROUP",
+      "variadic": false,
+      "positional_params": [{ "name": "x", "type": "MATRIX" }],
+      "keyword_params": {
+        "buckets": { "type": "INT", "optional": true, "description": "Number of buckets (or equivalent grouping count)." },
+        "range": { "type": "STRING", "optional": true, "description": "Range specification, e.g. 'a,b,c'." },
+        "skipBegin": { "type": "BOOL", "optional": true },
+        "skipEnd": { "type": "BOOL", "optional": true }
+      }
+    },
+    {
+      "name": "trade_when",
+      "scopes": ["COMBO", "REGULAR"],
+      "return_type": "MATRIX",
+      "variadic": false,
+      "positional_params": [
+        { "name": "condition", "type": "ANY" },
+        { "name": "x", "type": "ANY" },
+        { "name": "z", "type": "ANY" }
+      ],
+      "keyword_params": {},
+      "description": "If condition is true, returns x; otherwise returns z."
+    },
+    {
+      "name": "vec_sum",
+      "scopes": ["COMBO", "REGULAR"],
+      "return_type": "MATRIX",
+      "variadic": false,
+      "positional_params": [{ "name": "x", "type": "VECTOR" }],
+      "keyword_params": {}
+    },
+    {
+      "name": "vec_avg",
+      "scopes": ["COMBO", "REGULAR"],
+      "return_type": "MATRIX",
+      "variadic": false,
+      "positional_params": [{ "name": "x", "type": "VECTOR" }],
+      "keyword_params": {}
+    },
+    {
+      "name": "combo_a",
+      "scopes": ["COMBO"],
+      "return_type": "MATRIX",
+      "variadic": true,
+      "min_args": 1,
+      "positional_params": [{ "name": "alpha", "type": "MATRIX" }],
+      "keyword_params": {
+        "nlength": { "type": "INT", "optional": true, "default": 250 },
+        "mode": { "type": "STRING", "optional": true, "default": "algo1" }
+      },
+      "description": "Super Alpha combination function (signature best-effort from provided text)."
+    },
+    {
+      "name": "self_corr",
+      "scopes": ["COMBO"],
+      "return_type": "MATRIX",
+      "variadic": false,
+      "positional_params": [{ "name": "input", "type": "MATRIX" }],
+      "keyword_params": {}
+    },
+    {
+      "name": "reduce_sum",
+      "scopes": ["COMBO"],
+      "return_type": "MATRIX",
+      "variadic": false,
+      "positional_params": [{ "name": "input", "type": "ANY" }],
+      "keyword_params": {}
+    },
+    {
+      "name": "reduce_avg",
+      "scopes": ["COMBO"],
+      "return_type": "MATRIX",
+      "variadic": false,
+      "positional_params": [{ "name": "input", "type": "ANY" }],
+      "keyword_params": {}
+    },
+    {
+      "name": "reduce_max",
+      "scopes": ["COMBO"],
+      "return_type": "MATRIX",
+      "variadic": false,
+      "positional_params": [{ "name": "input", "type": "ANY" }],
+      "keyword_params": {}
+    }
+  ]
+}
+

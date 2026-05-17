@@ -1,0 +1,16 @@
+{
+  "candidates": [
+    {
+      "expression": "rank(add(ts_backfill(sample_value_field, 60), reverse(ts_backfill(sample_quality_field, 60))))",
+      "economic_rationale": "Public placeholder value-plus-quality candidate used to illustrate candidate file format.",
+      "hypothesis": "A valuation field may behave better when combined with a simple quality overlay.",
+      "dataset_family": "public_value_quality_demo"
+    },
+    {
+      "expression": "group_rank(add(ts_backfill(sample_value_field, 45), reverse(ts_backfill(sample_breadth_field, 60))), industry)",
+      "economic_rationale": "Public placeholder industry-relative variant used to show a second candidate shape.",
+      "hypothesis": "Industry-relative compression may improve robustness versus a raw global version.",
+      "dataset_family": "public_value_industry_demo"
+    }
+  ]
+}

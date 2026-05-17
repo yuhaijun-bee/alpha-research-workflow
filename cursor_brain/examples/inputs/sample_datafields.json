@@ -1,0 +1,22 @@
+{
+  "results": [
+    {
+      "id": "sample_signal_field",
+      "type": "MATRIX",
+      "description": "Public placeholder signal field used in mock examples.",
+      "dataset": {
+        "id": "PUBLIC_DATASET",
+        "name": "Public Demo Dataset"
+      }
+    },
+    {
+      "id": "sample_quality_field",
+      "type": "MATRIX",
+      "description": "Public placeholder quality field used in mock examples.",
+      "dataset": {
+        "id": "PUBLIC_DATASET",
+        "name": "Public Demo Dataset"
+      }
+    }
+  ]
+}

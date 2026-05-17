@@ -1,0 +1,16 @@
+{
+  "candidates": [
+    {
+      "expression": "rank(ts_mean(sample_other_field, 20))",
+      "economic_rationale": "Public placeholder auxiliary-data candidate showing the simplest possible skeleton.",
+      "hypothesis": "A slow-moving auxiliary signal can be tested with a minimal operator stack.",
+      "dataset_family": "public_other_demo"
+    },
+    {
+      "expression": "group_scale(rank(ts_mean(sample_other_field, 20)), industry)",
+      "economic_rationale": "Public placeholder group-scaled auxiliary-data candidate.",
+      "hypothesis": "Industry-aware scaling may keep the signal while improving exposure balance.",
+      "dataset_family": "public_other_group_demo"
+    }
+  ]
+}

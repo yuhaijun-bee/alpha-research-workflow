@@ -1,0 +1,18 @@
+{
+  "result": {
+    "multisim_id": "MULTISIM_PLACEHOLDER",
+    "status": "COMPLETE",
+    "children": [
+      {
+        "simulation_id": "SIM_PUBLIC_001",
+        "alpha_id": "ALPHA_PUBLIC_001",
+        "status": "COMPLETE"
+      },
+      {
+        "simulation_id": "SIM_PUBLIC_002",
+        "alpha_id": "ALPHA_PUBLIC_002",
+        "status": "COMPLETE"
+      }
+    ]
+  }
+}
